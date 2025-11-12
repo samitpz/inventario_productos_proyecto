@@ -1,116 +1,54 @@
 # 🧾 Sistema de Inventario de Productos
-
-**Versión:** 1.0
-**Autor:** Samuel patiño toro 
-**Tecnologías:** Java 21, Spring Boot 3.4.11, Maven, MySQL, Swagger UI
+**Versión:** 1.1  
+**Autor:** Samuel Patiño Toro  
+**Tecnologías:** Java 21, Spring Boot 3.4.11, Maven, MySQL 8.0, Swagger UI
 
 ---
 
 ## 📖 Descripción del Proyecto
+El **Sistema de Inventario de Productos** es una **API REST** desarrollada con **Spring Boot** que permite administrar productos dentro de una base de datos **MySQL**.  
+Implementa las operaciones básicas de un CRUD con arquitectura por capas (**Controller**, **Service**, **Repository**, **DTO**).
 
-Este proyecto es una **API REST** desarrollada en **Spring Boot** para la **gestión de productos de inventario**.
-Permite realizar las operaciones básicas de un CRUD:
+**Operaciones disponibles:**
+- **GET:** Listar todos los productos o buscar por ID.
+- **POST:** Crear un nuevo producto.
+- **PUT:** Actualizar un producto existente.
+- **DELETE:** Eliminar un producto por su ID.
 
-* **GET:** Listar todos los productos.
-* **POST:** Crear un nuevo producto.
-* **PUT:** Actualizar un producto existente.
-* **DELETE:** Eliminar un producto por su ID.
-
-La aplicación utiliza **Spring Data JPA** para la conexión con MySQL y **Swagger UI** para la documentación interactiva de la API.
+La aplicación utiliza **Spring Data JPA** para la persistencia y **Swagger UI** para la documentación interactiva de los endpoints.
 
 ---
 
 ## ⚙️ Requisitos Previos
-
-* **Java 21** o superior
-* **MySQL 8.0** o superior
-* **IntelliJ IDEA / VS Code / Eclipse**
-* **Maven**
+- Java 21 o superior
+- MySQL 8.0 o superior
+- Maven 3.9+
+- IntelliJ IDEA / Eclipse / VS Code
 
 ---
 
 ## 🛠️ Configuración y Ejecución
 
-1. Clona o descarga este repositorio.
-
+1. Clona este repositorio en tu máquina local.
 2. Abre el proyecto en tu IDE favorito.
+3. Configura la base de datos en el archivo `src/main/resources/application.properties`:
 
-3. Configura la base de datos en `src/main/resources/application.properties`:
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/inventariodb?createDatabaseIfNotExist=true
+spring.datasource.username=root
+spring.datasource.password=Da*t4g5?T4rn5n-
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
-   ```properties
-   spring.datasource.url=jdbc:mysql://localhost:3306/inventario_db
-   spring.datasource.username=root
-   spring.datasource.password=TuContraseña
-   spring.jpa.hibernate.ddl-auto=update
-   spring.jpa.show-sql=true
-   ```
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
 
-4. Ejecuta la clase principal:
+server.port=8080
 
-   ```
-   ProductosApplication.java
-   ```
-
-5. Abre tu navegador y accede a Swagger en:
-   👉 **[http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)**
-
----
-
-## 📸 Captura de Swagger
-
-A continuación se muestra la interfaz del sistema funcionando con los 4 endpoints del CRUD:
+springdoc.api-docs.path=/v3/api-docs
+springdoc.swagger-ui.path=/swagger-ui.html
+springdoc.swagger-ui.operationsSorter=method
+springdoc.swagger-ui.tagsSorter=alpha
+springdoc.swagger-ui.doc-expansion=none
 
 
-
----
-
-## 🧩 Estructura del Proyecto
-
-```
-src/
- ├── main/
- │   ├── java/com/inventario/productos/
- │   │   ├── controller/ProductoController.java
- │   │   ├── dto/ProductoDTO.java
- │   │   ├── model/Producto.java
- │   │   ├── repository/ProductoRepository.java
- │   │   ├── service/ProductoService.java
- │   │   ├── service/ProductoServiceInterface.java
- │   │   └── ProductosApplication.java
- │   └── resources/application.properties
- └── test/
-```
-
----
-
-## 🧪 Pruebas en Swagger
-
-Puedes probar los endpoints directamente desde Swagger:
-
-### 🔹 Crear Producto (POST)
-
-```json
-{
-  "nombre": "Teclado Mecánico",
-  "descripcion": "Teclado retroiluminado RGB",
-  "precio": 250.0,
-  "stock": 15
-}
-```
-
-### 🔹 Actualizar Producto (PUT)
-
-```json
-{
-  "nombre": "Teclado Mecánico Premium",
-  "descripcion": "Versión mejorada RGB",
-  "precio": 300.0,
-  "stock": 10
-}
-```
-
----
-
-## 👨‍💻 Autor
-
-Proyecto desarrollado por **Samuel patiño toro**

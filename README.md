@@ -1,94 +1,128 @@
 # 🧾 Sistema de Inventario de Productos
-
-**Versión:** 1.0
-**Autor:** Samuel patiño toro
-**Tecnologías:** Java 21, Spring Boot 3.4.11, Maven, MySQL, Swagger UI
+**Versión:** 1.1  
+**Autor:** Samuel Patiño Toro  
+**Tecnologías:** Java 21, Spring Boot 3.4.11, Maven, MySQL 8.0, Swagger UI
 
 ---
 
 ## 📖 Descripción del Proyecto
+El **Sistema de Inventario de Productos** es una **API REST** desarrollada con **Spring Boot** que permite administrar productos dentro de una base de datos **MySQL**.  
+Implementa las operaciones básicas de un CRUD con arquitectura por capas (**Controller**, **Service**, **Repository**, **DTO**).
 
-Este proyecto es una **API REST** desarrollada en **Spring Boot** para la **gestión de productos de inventario**.
-Permite realizar las operaciones básicas de un CRUD:
+**Operaciones disponibles:**
+- **GET:** Listar todos los productos o buscar por ID.
+- **POST:** Crear un nuevo producto.
+- **PUT:** Actualizar un producto existente.
+- **DELETE:** Eliminar un producto por su ID.
 
-* **GET:** Listar todos los productos.
-* **POST:** Crear un nuevo producto.
-* **PUT:** Actualizar un producto existente.
-* **DELETE:** Eliminar un producto por su ID.
-
-La aplicación utiliza **Spring Data JPA** para la conexión con MySQL y **Swagger UI** para la documentación interactiva de la API.
+La aplicación utiliza **Spring Data JPA** para la persistencia y **Swagger UI** para la documentación interactiva de los endpoints.
 
 ---
 
 ## ⚙️ Requisitos Previos
-
-* **Java 21** o superior
-* **MySQL 8.0** o superior
-* **IntelliJ IDEA / VS Code / Eclipse**
-* **Maven**
+- Java 21 o superior
+- MySQL 8.0 o superior
+- Maven 3.9+
+- IntelliJ IDEA / Eclipse / VS Code
 
 ---
 
 ## 🛠️ Configuración y Ejecución
 
-1. Clona o descarga este repositorio.
-
-2. Abre el proyecto en tu IDE favorito.
-
-3. Configura la base de datos en `src/main/resources/application.properties`:
-
-   ```properties
-   spring.datasource.url=jdbc:mysql://localhost:3306/inventario_db
-   spring.datasource.username=root
-   spring.datasource.password=TuContraseña
-   spring.jpa.hibernate.ddl-auto=update
-   spring.jpa.show-sql=true
+1. **Clona este repositorio en tu máquina local:**
+   ```bash
+   git clone <URL_DEL_REPOSITORIO>
+   cd productos
    ```
 
-4. Ejecuta la clase principal:
+2. **Abre el proyecto en tu IDE favorito.**
 
-   ```
-   ProductosApplication.java
-   ```
+3. **Configura la base de datos** en el archivo `src/main/resources/application.properties` con los siguientes valores:
 
-5. Abre tu navegador y accede a Swagger en:
-   👉 **[http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)**
+```properties
+# ============================================================
+# ================ CONFIGURACIÓN DE BASE DE DATOS ============
+# ============================================================
 
----
+spring.datasource.url=jdbc:mysql://localhost:3306/inventariodb?createDatabaseIfNotExist=true
+spring.datasource.username=root
+spring.datasource.password=Da*t4g5?T4rn5n-
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
-## 📸 Captura de Swagger
+# ============================================================
+# ==================== CONFIGURACIÓN JPA =====================
+# ============================================================
 
-A continuación se muestra la interfaz del sistema funcionando con los 4 endpoints del CRUD:
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
 
+# ============================================================
+# ==================== CONFIGURACIÓN SERVIDOR ================
+# ============================================================
 
+server.port=8080
+
+# ============================================================
+# =================== CONFIGURACIÓN SWAGGER ==================
+# ============================================================
+
+springdoc.api-docs.path=/v3/api-docs
+springdoc.swagger-ui.path=/swagger-ui.html
+springdoc.swagger-ui.operationsSorter=method
+springdoc.swagger-ui.tagsSorter=alpha
+springdoc.swagger-ui.doc-expansion=none
+```
+
+4. **Ejecuta la clase principal del proyecto:**  
+   `ProductosApplication.java`
+
+5. **Abre tu navegador y accede a Swagger UI:**  
+   👉 [http://localhost:8080/swagger-ui/index.html#/](http://localhost:8080/swagger-ui/index.html#/)
 
 ---
 
 ## 🧩 Estructura del Proyecto
 
-```
-src/
- ├── main/
- │   ├── java/com/inventario/productos/
- │   │   ├── controller/ProductoController.java
- │   │   ├── dto/ProductoDTO.java
- │   │   ├── model/Producto.java
- │   │   ├── repository/ProductoRepository.java
- │   │   ├── service/ProductoService.java
- │   │   ├── service/ProductoServiceInterface.java
- │   │   └── ProductosApplication.java
- │   └── resources/application.properties
- └── test/
+La estructura actual del proyecto (según IntelliJ IDEA) es la siguiente:
+
+```bash
+inventario productos proyecto/
+ └── productos/
+     └── src/
+         └── main/
+             ├── java/
+             │   └── com/inventario/productos/
+             │       ├── controller/
+             │       │   └── ProductoController.java
+             │       ├── dto/
+             │       │   └── ProductoDTO.java
+             │       ├── model/
+             │       │   └── Producto.java
+             │       ├── repository/
+             │       │   └── ProductoRepository.java
+             │       ├── service/
+             │       │   ├── ProductoService.java
+             │       │   └── ProductoServiceInterface.java
+             │       └── ProductosApplication.java
+             └── resources/
+                 ├── static/
+                 ├── templates/
+                 └── application.properties
 ```
 
 ---
 
 ## 🧪 Pruebas en Swagger
 
-Puedes probar los endpoints directamente desde Swagger:
+Puedes probar los endpoints directamente desde **Swagger UI**.
+
+---
 
 ### 🔹 Crear Producto (POST)
+**Endpoint:** `/api/productos`
 
+**Ejemplo JSON:**
 ```json
 {
   "nombre": "Teclado Mecánico",
@@ -98,8 +132,12 @@ Puedes probar los endpoints directamente desde Swagger:
 }
 ```
 
-### 🔹 Actualizar Producto (PUT)
+---
 
+### 🔹 Actualizar Producto (PUT)
+**Endpoint:** `/api/productos/{id}`
+
+**Ejemplo JSON:**
 ```json
 {
   "nombre": "Teclado Mecánico Premium",
@@ -111,6 +149,73 @@ Puedes probar los endpoints directamente desde Swagger:
 
 ---
 
-## 👨‍💻 Autor
+### 🔹 Eliminar Producto (DELETE)
+**Endpoint:** `/api/productos/{id}`
 
-Proyecto desarrollado por **Samuel patiño toro**
+En el campo **id**, escribe el identificador del producto a eliminar.  
+**Ejemplo:**
+```
+id = 3
+```
+
+---
+
+## ✅ Validaciones y Manejo de Errores
+
+- Validaciones con `javax.validation` (`@NotBlank`, `@NotNull`, `@PositiveOrZero`, `@Min`).
+- Manejo centralizado de excepciones con `@ControllerAdvice`:
+    - `MethodArgumentNotValidException` → 400 Bad Request
+    - `EntityNotFoundException` → 404 Not Found
+    - `DataIntegrityViolationException` → 409 Conflict
+
+**Ejemplo de respuesta de error:**
+```json
+{
+  "timestamp": "2025-11-12T09:12:00",
+  "status": 400,
+  "error": "Bad Request",
+  "message": "Validation failed",
+  "errors": [
+    {"field": "nombre", "message": "must not be blank"}
+  ]
+}
+```
+
+---
+
+## 📄 Swagger / Documentación OpenAPI
+
+La API está documentada con **springdoc-openapi**.
+- **Swagger UI:** [http://localhost:8080/swagger-ui/index.html#/](http://localhost:8080/swagger-ui/index.html#/)
+- **OpenAPI JSON:** [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
+
+---
+
+## 🧪 Pruebas (Tests)
+
+- **Unitarias:** JUnit 5 + Mockito
+- **Integración:** `@SpringBootTest` + `@AutoConfigureMockMvc`
+- **Repositorios:** `@DataJpaTest` + H2 o Testcontainers
+
+**Ejecutar tests:**
+```bash
+mvn test
+```
+
+## 🧾 Changelog
+
+**v1.1**
+- Documentación ampliada.
+- DTOs y validaciones añadidas.
+- Manejo de errores centralizado.
+- Integración con Swagger.
+
+**v1.0**
+- CRUD básico.
+- Configuración inicial de JPA.
+
+---
+
+## 👨‍💻 Autor
+Proyecto desarrollado por **Samuel Patiño Toro**  
+📍 **Colombia — 2025**
