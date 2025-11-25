@@ -1,11 +1,11 @@
-# 🧾 Sistema de Inventario de Productos
+#  Sistema de Inventario de Productos
 **Versión:** 1.1  
 **Autor:** Samuel Patiño Toro  
 **Tecnologías:** Java 21, Spring Boot 3.4.11, Maven, MySQL 8.0, Swagger UI
 
 ---
 
-## 📖 Descripción del Proyecto
+##  Descripción del Proyecto
 El **Sistema de Inventario de Productos** es una **API REST** desarrollada con **Spring Boot** que permite administrar productos dentro de una base de datos **MySQL**.  
 Implementa las operaciones básicas de un CRUD con arquitectura por capas (**Controller**, **Service**, **Repository**, **DTO**).
 
@@ -82,7 +82,7 @@ springdoc.swagger-ui.doc-expansion=none
 
 ---
 
-## 🧩 Estructura del Proyecto
+##  Estructura del Proyecto
 
 La estructura actual del proyecto (según IntelliJ IDEA) es la siguiente:
 
@@ -113,7 +113,7 @@ inventario productos proyecto/
 
 ---
 
-## 🧪 Pruebas en Swagger
+## Pruebas en Swagger
 
 Puedes probar los endpoints directamente desde **Swagger UI**.
 
@@ -160,7 +160,7 @@ id = 3
 
 ---
 
-## ✅ Validaciones y Manejo de Errores
+##  Validaciones y Manejo de Errores
 
 - Validaciones con `javax.validation` (`@NotBlank`, `@NotNull`, `@PositiveOrZero`, `@Min`).
 - Manejo centralizado de excepciones con `@ControllerAdvice`:
@@ -183,7 +183,7 @@ id = 3
 
 ---
 
-## 📄 Swagger / Documentación OpenAPI
+##  Swagger / Documentación OpenAPI
 
 La API está documentada con **springdoc-openapi**.
 - **Swagger UI:** [http://localhost:8080/swagger-ui/index.html#/](http://localhost:8080/swagger-ui/index.html#/)
@@ -191,7 +191,7 @@ La API está documentada con **springdoc-openapi**.
 
 ---
 
-## 🧪 Pruebas (Tests)
+##  Pruebas (Tests)
 
 - **Unitarias:** JUnit 5 + Mockito
 - **Integración:** `@SpringBootTest` + `@AutoConfigureMockMvc`
@@ -202,7 +202,7 @@ La API está documentada con **springdoc-openapi**.
 mvn test
 ```
 
-## 🧾 Changelog
+##  Changelog
 
 **v1.1**
 - Documentación ampliada.
