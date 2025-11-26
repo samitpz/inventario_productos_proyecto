@@ -5,7 +5,6 @@ import com.inventario.productos.model.Producto;
 import com.inventario.productos.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-// 🟢 IMPORTACIÓN NECESARIA PARA LA GESTIÓN DE TRANSACCIONES
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -17,13 +16,30 @@ public class ProductoService implements ProductoServiceInterface {
     @Autowired
     private ProductoRepository repository;
 
+    // 🛠️ C
     private ProductoDTO convertir(Producto producto) {
-        return new ProductoDTO(producto.getId(), producto.getNombre(), producto.getDescripcion(),
-                producto.getPrecio(), producto.getStock());
+        return new ProductoDTO(
+                producto.getId(),
+                producto.getNombre(),
+                producto.getDescripcion(),
+                producto.getPrecio(),
+                producto.getStock(),
+                // ⬅️ CAMPOS NUEVOS AÑADIDOS
+                producto.getCategoria(),
+                producto.getProveedor_id()
+        );
     }
 
+    // 🛠️ CORRECCIÓN: Ahora usa 6 argumentos (sin ID) para crear la Entidad Producto
     private Producto convertirDTO(ProductoDTO dto) {
-        return new Producto(dto.getNombre(), dto.getDescripcion(), dto.getPrecio(), dto.getStock());
+        return new Producto(
+                dto.getNombre(),
+                dto.getDescripcion(),
+                dto.getPrecio(),
+                dto.getStock(),
+                dto.getCategoria(),
+                dto.getProveedor_id()
+        );
     }
 
 
@@ -53,10 +69,16 @@ public class ProductoService implements ProductoServiceInterface {
     @Transactional
     public ProductoDTO actualizar(Long id, ProductoDTO dto) {
         Producto producto = repository.findById(id).orElseThrow();
+
+        // Asignación de campos existentes
         producto.setNombre(dto.getNombre());
         producto.setDescripcion(dto.getDescripcion());
         producto.setPrecio(dto.getPrecio());
         producto.setStock(dto.getStock());
+
+        producto.setCategoria(dto.getCategoria());
+        producto.setProveedor_id(dto.getProveedor_id());
+
         return convertir(repository.save(producto));
     }
 

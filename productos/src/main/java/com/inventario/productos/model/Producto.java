@@ -3,7 +3,7 @@ package com.inventario.productos.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "producto") // ⬅️ CORRECCIÓN: Apunta al nombre correcto de la tabla en MySQL.
+@Table(name = "producto")
 public class Producto {
 
     @Id
@@ -15,16 +15,23 @@ public class Producto {
     private Double precio;
     private Integer stock;
 
+
+    private String categoria;
+    private Long proveedor_id;
+
     public Producto() {}
 
-    public Producto(String nombre, String descripcion, Double precio, Integer stock) {
+    // Constructor con campos nuevos
+    public Producto(String nombre, String descripcion, Double precio, Integer stock, String categoria, Long proveedor_id) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.stock = stock;
+        this.categoria = categoria; // Nuevo
+        this.proveedor_id = proveedor_id; // Nuevo
     }
 
-    // Getters y Setters
+    // Getters y Setters EXISTENTES
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -39,4 +46,11 @@ public class Producto {
 
     public Integer getStock() { return stock; }
     public void setStock(Integer stock) { this.stock = stock; }
+
+
+    public String getCategoria() { return categoria; }
+    public void setCategoria(String categoria) { this.categoria = categoria; }
+
+    public Long getProveedor_id() { return proveedor_id; }
+    public void setProveedor_id(Long proveedor_id) { this.proveedor_id = proveedor_id; }
 }
