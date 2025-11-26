@@ -3,7 +3,7 @@ package com.inventario.productos.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "productos")
+@Table(name = "producto") // ⬅️ CORRECCIÓN: Apunta al nombre correcto de la tabla en MySQL.
 public class Producto {
 
     @Id

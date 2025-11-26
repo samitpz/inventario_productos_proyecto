@@ -6,7 +6,13 @@
       <list>
         <option value="$PROJECT_DIR$/productos/pom.xml" />
         <option value="$PROJECT_DIR$/cliente-escritorio/pom.xml" />
+        <option value="$PROJECT_DIR$/frontend-web/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/cliente-escritorio/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectResources">
